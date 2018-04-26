@@ -5,4 +5,4 @@ CLI Rcon Tool in .NETCore
 [.NET Core Runtime 2.0](https://www.microsoft.com/net/download/linux-package-manager/ubuntu17-10/runtime-2.0.5)
 
 # How To Download
-`wget https://api.github.com/repos/Swiggies/ElDewrconCLI/releases/latest`
+`wget https://github.com/Swiggies/ElDewrconCLI/releases/download/0.1.0/ElDewRconCLI.zip`
