@@ -54,7 +54,10 @@ namespace ElDewCon
             {
                 Message[] messages = new Message().LoadFromJson();
                 foreach (Message m in messages)
-                    Console.WriteLine($"Loaded message: {m.msg}");
+                {
+                    InitializeMessageTimers(m);
+                    Console.WriteLine($"Loaded message: {m.msg} every {m.time} minute(s).");
+                }
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
 
