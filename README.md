@@ -9,10 +9,8 @@ Can be used on Linux with tmux or similar programs to keep it running in the bac
 [.NET Core Runtime 2.0+](https://www.microsoft.com/net/download/windows/run)
 
 # How To Download
-## Linux
-`wget https://github.com/Swiggies/ElDewCon/releases/download/0.2.0/ElDewCon_0.2.0-linux-x64.zip`
-## Windows
-Download the zip from [here](https://github.com/Swiggies/ElDewCon/releases/lates).
+*Linux:* `wget https://github.com/Swiggies/ElDewCon/releases/download/0.2.0/ElDewCon_0.2.0-linux-x64.zip`
+*Windows:* Download the zip from [here](https://github.com/Swiggies/ElDewCon/releases/lates).
 
 # How to Use
 Type quit/exit to quit/exit.
