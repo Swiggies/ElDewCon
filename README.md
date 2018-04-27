@@ -28,3 +28,6 @@ Type quit/exit to quit/exit.
 ## Auto-Messages
 The Messages.json file comes with 3 default messages to show how it works. 
 The "message" line is what the server will announce. The "time" field is how long a message will take to appear in minutes.
+
+# Issues & Feature Requests
+Please submit these in the issues section.
