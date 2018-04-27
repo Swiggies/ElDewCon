@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using WebSocketSharp;
 using System.Timers;
 
-namespace ElDewrconCLI
+namespace ElDewCon
 {
     class Program
     {
@@ -54,7 +54,7 @@ namespace ElDewrconCLI
             {
                 Message[] messages = new Message().LoadFromJson();
                 foreach (Message m in messages)
-                    Console.WriteLine(InitializeMessageTimers(m));
+                    Console.WriteLine($"Loaded message: {m.msg}");
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
 

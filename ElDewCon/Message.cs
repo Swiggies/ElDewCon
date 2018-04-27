@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace ElDewrconCLI
+namespace ElDewCon
 {
     class Message
     {
