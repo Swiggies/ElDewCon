@@ -1,6 +1,14 @@
 ﻿[
   {
-    "msg": "Testing",
+    "msg": "This is a server test message that will appear every 1 minute.",
     "time": 1
+  },
+  {
+    "msg": "This is a server test message that will appear every 10 minutes.",
+    "time": 10
+  },
+  {
+    "msg": "This is a server test message that will appear every 5 minutes.",
+    "time": 5
   }
 ]
