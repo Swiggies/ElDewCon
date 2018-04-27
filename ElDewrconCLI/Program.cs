@@ -1,12 +1,16 @@
 ﻿using System;
 using WebSocketSharp;
+using System.Timers;
 
 namespace ElDewrconCLI
 {
     class Program
     {
+        static WebSocket ws;
+
         static void Main(string[] args)
         {
+
             Console.WriteLine("Server IP Address:");
             string address = Console.ReadLine();
 
@@ -16,7 +20,7 @@ namespace ElDewrconCLI
             Console.WriteLine("Server rcon password:");
             string pass = Console.ReadLine();
 
-            WebSocket ws = new WebSocket($"ws://{address}:{port}", "dew-rcon");
+            ws = new WebSocket($"ws://{address}:{port}", "dew-rcon");
 
             ws.OnOpen += (sender, r) =>
             {
@@ -46,14 +50,36 @@ namespace ElDewrconCLI
             ws.Connect();
             ws.Send(pass);
 
+            try
+            {
+                Message[] messages = new Message().LoadFromJson();
+                foreach (Message m in messages)
+                    Console.WriteLine(InitializeMessageTimers(m));
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
+
             while (true)
             {
                 string command = Console.ReadLine();
-                if (command != "exit")
-                    ws.Send(command);
-                else
+                if (command == "exit" || command == "quit")
                     Environment.Exit(0);
+                ws.Send(command);
             }
+        }
+
+        static Timer InitializeMessageTimers(Message msg)
+        {
+            Timer t = new Timer();
+            t.AutoReset = true;
+            t.Interval = msg.time * 60000;
+            t.Elapsed += (sender, e) => SendServerMsg(sender, e, msg.msg);
+            t.Enabled = true;
+            return t;
+        }
+
+        static void SendServerMsg(Object source, ElapsedEventArgs e, string msg)
+        {
+            ws.Send($"server.say {msg}");
         }
     }
 }
