@@ -8,9 +8,9 @@ Can be used on Linux with tmux or similar programs to keep it running in the bac
 **Windows:** [.NET Core Runtime 2.0+](https://www.microsoft.com/net/download/windows/run)
 
 # How To Download
-**Linux:** `wget https://github.com/Swiggies/ElDewCon/releases/download/0.2.0/ElDewCon_0.2.0-linux-x64.zip`
+**Linux:** `wget https://github.com/Swiggies/ElDewCon/releases/download/0.2.0/ElDewCon_0.2.0.zip`
 
-**Windows:** Download the zip from [here](https://github.com/Swiggies/ElDewCon/releases/lates).
+**Windows:** Download the zip from [here](https://github.com/Swiggies/ElDewCon/releases/latest).
 
 # How to Use
 Type quit/exit to quit/exit.
@@ -22,7 +22,8 @@ Type quit/exit to quit/exit.
 5. Enjoy!
 
 ## Windows
-1. Run the .exe included.
+1. Open a CMD window in the folder you extracted ElDewCon to
+2. Run the command `dotnet ElDewCon.dll`
 
 ## Auto-Messages
 The Messages.json file comes with 3 default messages to show how it works. 
