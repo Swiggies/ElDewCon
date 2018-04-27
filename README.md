@@ -1,5 +1,5 @@
-# ElDewrconCLI
-CLI Rcon Tool in .NETCore with support for auto messages.
+# ElDewCon
+CLI Rcon Tool on .NETCore with support for auto messages.
 Can be used on Linux with tmux or similar programs to keep it running in the background.
 
 # Requirements
