@@ -7,18 +7,30 @@ namespace ElDewCon
     class Program
     {
         static WebSocket ws;
+        static int counter = 0;
 
         static void Main(string[] args)
         {
+            string address = string.Empty;
+            string port = string.Empty;
+            string pass = string.Empty;
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Server IP Address:");
+                address = Console.ReadLine();
 
-            Console.WriteLine("Server IP Address:");
-            string address = Console.ReadLine();
+                Console.WriteLine("Server rcon port:");
+                port = Console.ReadLine();
 
-            Console.WriteLine("Server rcon port:");
-            string port = Console.ReadLine();
-
-            Console.WriteLine("Server rcon password:");
-            string pass = Console.ReadLine();
+                Console.WriteLine("Server rcon password:");
+                pass = Console.ReadLine();
+            }
+            else
+            {
+                address = args[0];
+                port = args[1];
+                pass = args[2];
+            }
 
             ws = new WebSocket($"ws://{address}:{port}", "dew-rcon");
 
@@ -38,12 +50,14 @@ namespace ElDewCon
             ws.OnError += (sender, r) =>
             {
                 Console.WriteLine(r.Message);
+                PrepareForClose();
                 return;
             };
 
             ws.OnClose += (sender, r) =>
             {
                 Console.WriteLine(r.Reason);
+                PrepareForClose();
                 return;
             };
 
@@ -52,11 +66,12 @@ namespace ElDewCon
 
             try
             {
-                Message[] messages = new Message().LoadFromJson();
-                foreach (Message m in messages)
+                Message messages = new Message().LoadFromJson();
+                if (messages != null)
                 {
-                    InitializeMessageTimers(m);
-                    Console.WriteLine($"Loaded message: {m.msg} every {m.time} minute(s).");
+                    InitializeMessageTimers(messages);
+                    foreach(string s in messages.msg)
+                    Console.WriteLine($"Loaded message: {s} every {messages.time} minute(s).");
                 }
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
@@ -75,14 +90,21 @@ namespace ElDewCon
             Timer t = new Timer();
             t.AutoReset = true;
             t.Interval = msg.time * 60000;
-            t.Elapsed += (sender, e) => SendServerMsg(sender, e, msg.msg);
+            t.Elapsed += (sender, e) => SendServerMsg(sender, e, msg);
             t.Enabled = true;
             return t;
         }
 
-        static void SendServerMsg(Object source, ElapsedEventArgs e, string msg)
+        static void SendServerMsg(Object source, ElapsedEventArgs e, Message msg)
         {
-            ws.Send($"server.say {msg}");
+            ws.Send($"server.say {msg.msg[counter]}");
+            counter++;//Make this loop back to 0 when reached the end.
+        }
+
+        static void PrepareForClose()
+        {
+            Console.ReadKey();
+            Environment.Exit(0);
         }
     }
 }
