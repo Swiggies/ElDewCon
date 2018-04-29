@@ -8,6 +8,7 @@ namespace ElDewCon
     {
         static WebSocket ws;
         static int counter = 0;
+        static int messagesCount = 0;
 
         static void Main(string[] args)
         {
@@ -61,12 +62,24 @@ namespace ElDewCon
                 return;
             };
 
-            ws.Connect();
-            ws.Send(pass);
+            try
+            {
+                ws.Connect();
+                ws.Send(pass);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                PrepareForClose();
+            }
 
             try
             {
+                if (!ws.IsAlive)
+                    return;
+
                 Message messages = new Message().LoadFromJson();
+                messagesCount = messages.msg.Length;
                 if (messages != null)
                 {
                     InitializeMessageTimers(messages);
@@ -98,7 +111,9 @@ namespace ElDewCon
         static void SendServerMsg(Object source, ElapsedEventArgs e, Message msg)
         {
             ws.Send($"server.say {msg.msg[counter]}");
-            counter++;//Make this loop back to 0 when reached the end.
+            counter++;
+            if (counter >= messagesCount)
+                counter = 0;
         }
 
         static void PrepareForClose()
