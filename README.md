@@ -31,3 +31,7 @@ The "message" line is what the server will announce. The "time" field is how lon
 
 # Issues & Feature Requests
 Please submit these in the issues section.
+
+## Known issues
+### When starting with arguments my password doesn't work
+You may have some escape characters in your password. Make sure to wrap your password in double quotations `"password"` and if you have a % symbol in your password you will have to double it up. E.g `pass%word` would become `pas%%word`.
